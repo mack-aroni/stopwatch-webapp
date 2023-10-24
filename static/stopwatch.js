@@ -5,15 +5,17 @@ const pauseBtn = document.querySelector("#pauseBtn");
 const resetBtn = document.querySelector("#resetBtn");
 
 let countdownTime = parseInt(time); // initial countdown time (in seconds)
-console.log(time)
-let currentTime = countdownTime+1; // initially displayed time
-console.log(currentTime)
-let paused = false // pause logic
-updateTime(time) // update timeDisplay for initial time
-
-paused = true;
+console.log(countdownTime);
+let nonZero = (countdownTime > 0); // checks for nonzero countdown time, so alarm doesnt automatically play
+console.log(nonZero);
+let currentTime = countdownTime; // initially displayed time
+let paused = false; // pause logic
 let end = false; // timer end logic
 let intervalId;
+updateTime(time) // update timeDisplay for initial time
+
+paused = true; // sets paused to true after initial time update
+
 
 // helper function to set the active state for buttons
 function setActiveButton(activeButton) {
@@ -62,7 +64,9 @@ resetBtn.addEventListener("click", () => {
     paused = false
   }
   setActiveButton(resetBtn);
-  currentTime = countdownTime+1;
+  // resets time 
+  currentTime = countdownTime;
+  // updates to new time
   updateTime();
   clearInterval(intervalId);
   paused = true;
@@ -71,14 +75,18 @@ resetBtn.addEventListener("click", () => {
 // updates timeDisplay and the title using currentTime
 function updateTime() {
   if (!paused && currentTime > 0) {
-    currentTime--;
     // updates timeDisplay
     timeDisplay.textContent = formatTime();
     // updates document title
     document.title = formatTime();
+    currentTime--;
   }
   else if (currentTime == 0) {
     timeDisplay.textContent = "00:00:00";
+    if (!end && nonZero) {
+      const audio = document.getElementById("timerAudio");
+      audio.play();
+    }
     setActiveButton(resetBtn);
     end = true;
   }
