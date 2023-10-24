@@ -83,6 +83,7 @@ function updateTime() {
   }
   else if (currentTime == 0) {
     timeDisplay.textContent = "00:00:00";
+    document.title = "00:00:00";
     if (!end && nonZero) {
       const audio = document.getElementById("timerAudio");
       audio.play();
