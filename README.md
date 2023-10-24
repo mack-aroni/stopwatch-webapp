@@ -1,6 +1,6 @@
 # stopwatch-webapp
 
-Created for personal use as a mini-project
+Created for personal use as a mini-project and heavily based off of https://www.online-stopwatch.com/timer/
 
 Utilizes Flask to take in and process an input from the URL (URL input used instead of interface because of personal preference)
 
