@@ -83,13 +83,14 @@ function updateTime() {
   }
   else if (currentTime == 0) {
     timeDisplay.textContent = "00:00:00";
-    document.title = "00:00:00";
+    // play audio only when the timer has completed a countdown
     if (!end && nonZero) {
       const audio = document.getElementById("timerAudio");
       audio.play();
     }
-    setActiveButton(resetBtn);
     end = true;
+    // reset buttons
+    setActiveButton(resetBtn);
     clearInterval(intervalId);
   }
 }
