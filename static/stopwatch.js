@@ -90,6 +90,7 @@ function updateTime() {
     }
     setActiveButton(resetBtn);
     end = true;
+    clearInterval(intervalId);
   }
 }
 
